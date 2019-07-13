@@ -55,7 +55,7 @@ export default {
       this.$refs.loginform.validate((valid) => {
         if (valid) {
           // 提交登陆请求
-          this.axios.post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.loginform)
+          this.axios.post('authorizations', this.loginform)
             .then((res) => {
               // 后台返回的数据
               // console.log(res.data)
