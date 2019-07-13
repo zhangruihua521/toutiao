@@ -36,8 +36,8 @@ export default {
     }
     return {
       loginform: {
-        mobile: '',
-        code: ''
+        mobile: '13911111111',
+        code: '246810'
       },
       rules: {
         mobile: [
@@ -59,10 +59,13 @@ export default {
             .then((res) => {
               // 后台返回的数据
               // console.log(res.data)
+              // 保存用户的信息,用来判断用户的状态
+              // sessionStorage用来保存信息
+              window.sessionStorage.setItem('toutiao', JSON.stringify(res.data.data))
               this.$router.push('/')
             })
             .catch(() => {
-              this.message.error('手机号或验证码错误')
+              this.$message.error('手机号或验证码错误')
             })
         }
       })
