@@ -48,13 +48,13 @@
         <span class="text">江苏传智播客科技教育有限公司</span>
         <el-dropdown style="float:right">
           <span class="el-dropdown-link" >
-              <img src="../../assets/images/avatar.jpg" alt="" style="vertical-align:middle" width="30" height="30">
-           <span style="vertical-align:middle;padding-left:5px">黑马小妹</span>
+              <img :src="avator" alt="" style="vertical-align:middle" width="30" height="30">
+           <span style="vertical-align:middle;padding-left:5px">{{name}}</span>
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item icon="el-icon-setting">个人设置</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-unlock">退出登陆</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-setting" @click.native="setting">个人设置</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-unlock" @click.native="logout">退出登陆</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
@@ -70,12 +70,26 @@ export default {
   data () {
     return {
       // false是展开,true是收起
-      collapse: false
+      collapse: false,
+      name: '',
+      avator: ''
     }
+  },
+  created () {
+    const user = JSON.parse(window.sessionStorage.getItem('toutiao'))
+    this.name = user.name
+    this.avator = user.photo
   },
   methods: {
     toggleMenu () {
       this.collapse = !this.collapse
+    },
+    setting () {
+      this.$router.push('/setting')
+    },
+    logout () {
+      window.sessionStorage.removeItem('toutiao')
+      this.$router.push('/login')
     }
   }
 }
