@@ -4,12 +4,7 @@
     <!-- 结果区域 -->
     <el-card>
       <div slot="header">
-        <el-breadcrumb separator="/">
-          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item>
-            <a href="/">内容管理</a>
-          </el-breadcrumb-item>
-        </el-breadcrumb>
+        <my-bread>内容管理</my-bread>
       </div>
       <!-- 筛选条件 -->
       <el-form :v-model="reqParams" label-width="80px" size="small">
@@ -56,6 +51,7 @@ export default {
         begin_pubdat: null,
         end_pubdate: null
       },
+      pubdate: null,
       list: [
         { name: 'java', id: '1' }
       ]
