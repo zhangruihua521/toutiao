@@ -1,8 +1,17 @@
 // 配置axios
 import axios from 'axios'
+import JSONBig from 'json-bigint'
 const instance = axios.create({
   // 配置对象
   baseURL: 'http://ttapi.research.itcast.cn/mp/v1_0/',
+  transformResponse: [(data) => {
+    // 对 data 进行任意转换处理
+    // data 为 null 使用JSONBig转换null会出现异常
+    if (data) {
+      return JSONBig.parse(data)
+    }
+    return data
+  }],
   headers: {
     // json.parse() 将字符串转化为对象取token的值
     // Authorization: 'Bearer ' + JSON.parse(window.sessionStorage.getItem('toutiao')).token
@@ -28,8 +37,8 @@ instance.interceptors.response.use((response) => {
 }, (error) => {
 // 对响应错误的数据做点什么
 // 如果状态码为401,拦截到登陆页
-  if (error.response.status === 401) {
-    // hash 是url#开始后的字符串
+  if (error.response && error.response.status === 401) {
+    // r hash 是url#开始后的字符串
     location.hash('#/login')
   }
   return Promise.reject(error)
