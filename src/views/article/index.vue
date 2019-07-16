@@ -18,9 +18,8 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="频道:">
-          <el-select v-model="reqParams.channel_id">
-            <el-option v-for="item in list" :key="item.id" :label="item.name" :value="item.id"></el-option>
-          </el-select>
+           <!-- :value="reqParams.channel_id"  @input="把改变的数据设置给reqParams.channel_id" -->
+          <my-channel v-model="reqParams.channel_id"></my-channel>
         </el-form-item>
         <el-form-item label="日期:">
           <el-date-picker
@@ -102,8 +101,6 @@ export default {
         begin_pubdate: null,
         end_pubdate: null
       },
-      // 频道列表
-      list: [],
       // 文章列表数据
       articles: [],
       // 日期数据
@@ -113,8 +110,6 @@ export default {
     }
   },
   created () {
-    // 获取频道的数据
-    this.getChannel()
     // 获取文件列表的数据
     this.getArticle()
   },
@@ -154,14 +149,7 @@ export default {
       this.reqParams.begin_pubdate = values[0]
       this.reqParams.end_pubdate = values[1]
     },
-    // 获取频道的数据
-    async getChannel () {
-      // data的响应的内容 {data:{data:{channels:[id:,name:]}}}
-      const {
-        data: { data }
-      } = await this.axios.get('channels')
-      this.list = data.channels
-    },
+
     // 获取文件列表的数据
     // post 传参  post('url',{参数对象})
     // get 传参 get('url?key=value&....') get('url',{params:{参数对象}})
