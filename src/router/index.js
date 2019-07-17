@@ -6,6 +6,7 @@ import Home from '../views/home/index.vue'
 import Welcome from '../views/welcome/index.vue'
 import NotFound from '../views/404/index.vue'
 import Article from '../views/article/index.vue'
+import Image from '../views/image/index.vue'
 Vue.use(VueRouter)
 // 初始化路由对象
 const router = new VueRouter({
@@ -17,7 +18,8 @@ const router = new VueRouter({
       component: Home,
       children: [
         { name: 'welcome', path: '/', component: Welcome },
-        { name: 'article', path: '/article', component: Article }
+        { name: 'article', path: '/article', component: Article },
+        { name: 'image', path: '/image', component: Image }
       ] },
     // 有很多规则,当没有找到页面的时候出现404
     { name: 'notfound', path: '*', component: NotFound }
