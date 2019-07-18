@@ -9,6 +9,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import router from './router/index.js'
 import axios from '@/api/axios'
 import components from '@/components'
+import '@/styles/index.less'
 Vue.use(components)
 Vue.prototype.axios = axios
 Vue.use(ElementUI)
