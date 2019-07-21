@@ -105,7 +105,8 @@ export default {
     // 添加收藏和取消收藏,发送请求
     // true是前台收藏了,后台中false-取消收藏，true-添加收藏 ,所以取反
     async  toggle (item) {
-      const { data: { data } } = await this.axios.put('user/images/' + item.id, { collect: !item.is_collected })
+      const { data: { data } } = await this.axios.put('user/images/' + item.id,
+        { collect: !item.is_collected })
       // 操作成功
       this.$message.success('操作成功')
       // 白色改成红色,红色改成白色   把当前的图片的状态改成操作后  ,后台给的状态
